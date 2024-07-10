@@ -12,7 +12,7 @@ interface Props {
 
 function Card({ title, updatedAt, logsCount, dataName, dataUpdatedAt }: Props) {
   return (
-    <div className="p-6 text-gray-400 bg-slate-100 w-fit rounded-2xl flex gap-8">
+    <div className="p-6 text-gray-400 bg-slate-100 rounded-2xl flex gap-8 min-w-[600px] w-[600px]">
       <div className="flex flex-col justify-between">
         <div>
           <h2>{title}</h2>
