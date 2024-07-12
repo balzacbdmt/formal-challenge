@@ -1,12 +1,14 @@
 import { Icon } from "@iconify/react";
 import { format, formatDistanceToNow } from "date-fns";
+import { DataType } from "../../../constants/types";
+import BarChart from "../../../components/BarChart/BarChart";
 
 interface Props {
   title?: string;
   updatedAt?: number;
   logsCount?: number;
   dataName?: string;
-  // TODO data prop
+  dataType?: DataType;
   dataUpdatedAt?: number;
   isLoading?: boolean;
   className?: string;
@@ -18,11 +20,19 @@ function Card({
   updatedAt,
   logsCount,
   dataName,
+  dataType,
   dataUpdatedAt,
   isLoading,
   className,
   appearDelay,
 }: Props) {
+  function dataRender() {
+    switch (dataType) {
+      case "barChart":
+        return <BarChart />
+    }
+  }
+
   return (
     <div
       className={`p-6 text-gray-400 bg-slate-100 rounded-2xl flex flex-col md:flex-row gap-2 md:gap-8 w-full md:min-w-[600px] md:w-[600px] ${className}`}
@@ -54,11 +64,11 @@ function Card({
           </span>
         </div>
       </div>
-      <div className="h-48 flex-1 bg-white rounded-xl p-4 flex flex-col justify-between">
+      <div className="h-48 flex-1 bg-white rounded-xl p-4 flex flex-col gap-4 justify-between">
         <p className={isLoading ? "skeleton-loading w-[10rem] h-[24px]" : ""}>
           {dataName}
         </p>
-        <p>TODO Graph or stats</p>
+        {dataRender()}
         {dataUpdatedAt && (
           <p className="text-xs">
             {format(new Date(dataUpdatedAt), "MMM d, HH:mm:ss")}

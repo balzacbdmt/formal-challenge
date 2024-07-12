@@ -32,6 +32,7 @@ function Home() {
                 updatedAt={c.updatedAt}
                 logsCount={c.logsCount}
                 dataName={c.dataName}
+                dataType={c.dataType}
                 dataUpdatedAt={c.dataUpdatedAt}
                 className={`opacity-0 animate-fade-in`}
                 appearDelay={`${index * 200}ms`}

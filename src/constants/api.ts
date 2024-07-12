@@ -8,7 +8,7 @@ export const cards: Card[] = [
     updatedAt: 1720616586000,
     logsCount: 12,
     dataName: "Logs / Time",
-    data: "TODO",
+    dataType: "barChart",
     dataUpdatedAt: 1720616586000,
   },
   {
@@ -18,7 +18,7 @@ export const cards: Card[] = [
     updatedAt: 1720616586000,
     logsCount: 4,
     dataName: "Access over 30 days",
-    data: "TODO",
+    dataType: "calendar",
     dataUpdatedAt: 1720616586000,
   },
   {
@@ -28,7 +28,7 @@ export const cards: Card[] = [
     updatedAt: 1720616586000,
     logsCount: 24,
     dataName: "Queries in database",
-    data: "TODO",
+    dataType: "stats",
   },
   {
     id: 4,
@@ -37,7 +37,7 @@ export const cards: Card[] = [
     updatedAt: 1720616586000,
     logsCount: 32,
     dataName: "Queries in database",
-    data: "TODO",
+    dataType: "stats",
     dataUpdatedAt: 1720616586000,
   },
   {
@@ -47,7 +47,7 @@ export const cards: Card[] = [
     updatedAt: 1720616586000,
     logsCount: 12,
     dataName: "Logs / Time",
-    data: "TODO",
+    dataType: "barChart",
     dataUpdatedAt: 1720616586000,
   },
 ];
