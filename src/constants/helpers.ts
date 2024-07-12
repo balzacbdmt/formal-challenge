@@ -17,3 +17,12 @@ export function getRandomNumber(min: number, max: number) {
 export function calculateCrossProductPercentage(value: number, max: number) {
   return (value / max) * 100;
 }
+
+/**
+ * Formats a number with commas for thousands, millions, etc
+ * @param number the number to format
+ * @returns A string representation of the number with commas as thousands separators
+ */
+export function formatNumberWithCommas(number: number): string {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
