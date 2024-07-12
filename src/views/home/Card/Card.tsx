@@ -1,9 +1,9 @@
 import { Icon } from "@iconify/react";
 import { format, formatDistanceToNow } from "date-fns";
 import { DataType } from "../../../constants/types";
-import BarChart from "../../../components/BarChart/BarChart";
-import Calendar from "../../../components/Calendar/Calendar";
-import Stats from "../../../components/Stats/Stats";
+import BarChart from "../../../components/barChart/BarChart";
+import Calendar from "../../../components/calendar/Calendar";
+import Stats from "../../../components/stats/Stats";
 
 interface Props {
   title?: string;
