@@ -5,28 +5,39 @@ import { Card as CardType } from "../../constants/types";
 
 function Home() {
   const [cards, setCards] = useState<CardType[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     getCards().then((cards: CardType[]) => {
       setCards(cards);
+      setIsLoading(false);
     });
+    // Here, we can add a catch for any errors due to fetching data
   }, []);
 
   function cardsMap(category: string) {
     return (
       <div className="px-12 flex gap-4 overflow-x-auto no-scrollbar">
-        {cards
-          .filter((c) => c.category === category)
-          .map((c) => (
-            <Card
-              key={c.id}
-              title={c.title}
-              updatedAt={c.updatedAt}
-              logsCount={c.logsCount}
-              dataName={c.dataName}
-              dataUpdatedAt={c.dataUpdatedAt}
-            />
-          ))}
+        {isLoading ? (
+          <Card isLoading={true} />
+        ) : (
+          cards
+            .filter((c) => c.category === category)
+            .map((c, index) => (
+              <Card
+                isLoading={false}
+                key={c.id}
+                title={c.title}
+                updatedAt={c.updatedAt}
+                logsCount={c.logsCount}
+                dataName={c.dataName}
+                dataUpdatedAt={c.dataUpdatedAt}
+                className={`opacity-0 animate-fade-in`}
+                appearDelay={`${index * 200}ms`}
+              />
+            ))
+        )}
       </div>
     );
   }

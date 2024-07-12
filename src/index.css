@@ -7,14 +7,14 @@ body {
   margin: 0;
 }
 
-
 h1 {
-  line-height: unset;
+  line-height: 56px;
   font-size: 38px;
 }
 
 h2 {
-  font-size: 28px;
+  line-height: 42px;
+  font-size: 24px;
 }
 
 .no-scrollbar::-webkit-scrollbar {
@@ -24,4 +24,24 @@ h2 {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.skeleton-loading {
+  background: linear-gradient(90deg, #ececec 25%, #f1f5f9 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-animation 1.5s infinite;
+  border-radius: 4px;
+}
+
+@keyframes skeleton-animation {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.animation-delay {
+  animation-delay: 3s;
 }
