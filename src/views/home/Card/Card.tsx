@@ -3,6 +3,7 @@ import { format, formatDistanceToNow } from "date-fns";
 import { DataType } from "../../../constants/types";
 import BarChart from "../../../components/BarChart/BarChart";
 import Calendar from "../../../components/Calendar/Calendar";
+import Stats from "../../../components/Stats/Stats";
 
 interface Props {
   title?: string;
@@ -33,6 +34,8 @@ function Card({
         return <BarChart />;
       case "calendar":
         return <Calendar />;
+      case "stats":
+        return <Stats />;
     }
   }
 
