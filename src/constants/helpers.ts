@@ -26,3 +26,12 @@ export function calculateCrossProductPercentage(value: number, max: number) {
 export function formatNumberWithCommas(number: number): string {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+/**
+ * Helper that joins strings together with a space
+ * @param items - Array of string and/or number to be joined.
+ * @returns The joined string, with items separated by a space.
+ * @example
+ * join(["A", "B", "C"]) => "A B C"
+ */
+export const join = (items: (string | number)[]) => items.join(" ");

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Card from "./Card/Card";
 import { getCards } from "../../constants/main";
 import { Card as CardType } from "../../constants/types";
+import Search from "./Search/Search";
 
 function Home() {
   const [cards, setCards] = useState<CardType[]>([]);
@@ -44,12 +45,13 @@ function Home() {
   }
 
   return (
-    <div className="py-16">
-      <h1 className="pl-12 font-medium mb-2">Recent</h1>
+    <>
+      <Search />
+      <h1 className="pt-32 pl-12 font-medium mb-2">Recent</h1>
       {cardsMap("recent")}
       <h1 className="pl-12 font-medium mt-8 mb-2">Saved</h1>
       {cardsMap("saved")}
-    </div>
+    </>
   );
 }
 
