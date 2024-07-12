@@ -66,7 +66,7 @@ function Card({
               isLoading ? "skeleton-loading w-[10rem] h-[16px]" : "text-xs"
             }
           >
-            {logsCount ? `${logsCount} New Logs since update` : ""}
+            {logsCount ? `${logsCount} new logs since update` : ""}
           </span>
         </div>
       </div>
