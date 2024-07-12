@@ -2,6 +2,7 @@ import { Icon } from "@iconify/react";
 import { format, formatDistanceToNow } from "date-fns";
 import { DataType } from "../../../constants/types";
 import BarChart from "../../../components/BarChart/BarChart";
+import Calendar from "../../../components/Calendar/Calendar";
 
 interface Props {
   title?: string;
@@ -29,7 +30,9 @@ function Card({
   function dataRender() {
     switch (dataType) {
       case "barChart":
-        return <BarChart />
+        return <BarChart />;
+      case "calendar":
+        return <Calendar />;
     }
   }
 
@@ -69,7 +72,7 @@ function Card({
           {dataName}
         </p>
         {dataRender()}
-        {dataUpdatedAt && (
+        {dataUpdatedAt && dataType !== "calendar" && (
           <p className="text-xs">
             {format(new Date(dataUpdatedAt), "MMM d, HH:mm:ss")}
           </p>

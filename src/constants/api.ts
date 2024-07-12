@@ -17,7 +17,7 @@ export const cards: Card[] = [
     category: "saved",
     updatedAt: 1720616586000,
     logsCount: 4,
-    dataName: "Access over 30 days",
+    dataName: "Access over 90 days",
     dataType: "calendar",
     dataUpdatedAt: 1720616586000,
   },
