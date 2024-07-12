@@ -72,7 +72,7 @@ function Card({
           {dataName}
         </p>
         {dataRender()}
-        {dataUpdatedAt && dataType !== "calendar" && (
+        {dataUpdatedAt && (
           <p className="text-xs">
             {format(new Date(dataUpdatedAt), "MMM d, HH:mm:ss")}
           </p>

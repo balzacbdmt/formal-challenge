@@ -19,7 +19,6 @@ export const cards: Card[] = [
     logsCount: 4,
     dataName: "Access over 90 days",
     dataType: "calendar",
-    dataUpdatedAt: 1720616586000,
   },
   {
     id: 3,
@@ -29,6 +28,7 @@ export const cards: Card[] = [
     logsCount: 24,
     dataName: "Queries in database",
     dataType: "stats",
+    dataUpdatedAt: 1720616586000,
   },
   {
     id: 4,
