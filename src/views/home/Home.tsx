@@ -18,7 +18,7 @@ function Home() {
 
   function cardsMap(category: string) {
     return (
-      <div className="px-12 flex gap-4 overflow-x-auto no-scrollbar">
+      <div className="px-12 flex flex-col md:flex-row gap-4 overflow-x-auto no-scrollbar">
         {isLoading ? (
           <Card isLoading={true} />
         ) : (
