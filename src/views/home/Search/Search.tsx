@@ -1,11 +1,23 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { join } from "../../../constants/helpers";
+import { getSuggestions } from "../../../constants/main";
 
 function Search() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
 
   // Add shorkeys
+
+  useEffect(() => {
+    setIsLoading(true);
+    getSuggestions().then((suggestions: string[]) => {
+      setSuggestions(suggestions);
+      setIsLoading(false);
+    });
+    // Here, we can add a catch for any errors due to fetching data
+  }, []);
 
   const containerClassName = join([
     "fixed text-gray-400 transition-all duration-300 z-50",
@@ -34,6 +46,21 @@ function Search() {
       setIsOpen(true);
     }
   }
+
+  const suggestionsMapper = (
+    <div className="flex flex-row gap-2 overflow-auto no-scrollbar p-2">
+      {suggestions.map((s, i) => (
+        <button
+          key={`${i}_${s.substring(0, 3)}`}
+          className="flex items-center gap-2 bg-gray-200 px-4 py-2 rounded-full hover:bg-gray-300"
+          onClick={() => alert(s)}
+        >
+          <Icon icon="lucide:sparkle" />
+          <span className="whitespace-nowrap">{s}</span>
+        </button>
+      ))}
+    </div>
+  );
 
   return (
     <>
@@ -64,6 +91,7 @@ function Search() {
             )}
           </div>
         </div>
+        {isOpen && suggestionsMapper}
       </div>
       <div className={backgroundClass} onClick={() => setIsOpen(false)} />
     </>
