@@ -61,11 +61,6 @@ function Search() {
     isOpen ? "bg-slate-200 py-3 px-6" : "px-12",
   ]);
 
-  const searchBarKeyClass = join([
-    "bg-white flex items-center gap-2 rounded-lg shadow-sm",
-    isOpen ? "py-1 px-2" : "py-2 px-4",
-  ]);
-
   function handleSearch() {
     if (!isOpen) {
       setIsOpen(true);
@@ -88,27 +83,30 @@ function Search() {
   );
 
   const categoriesMapper = (
-    <div className="flex flex-row gap-2 overflow-auto no-scrollbar p-2 mt-2">
-      {categories.map((s, i) => (
-        <button
-          key={`${i}_${s.substring(0, 3)}`}
-          className={`flex items-center gap-2 px-4 py-2 rounded-full ${
-            selectedCategory === s
-              ? "bg-gray-800 text-white"
-              : "bg-gray-200 hover:bg-gray-300 text-gray-500 font-semibold"
-          }`}
-          onClick={() => setSelectedCategory(s)}
-        >
-          {categoriesIcons[s] && (
-            <Icon
-              icon={categoriesIcons[s]}
-              fontSize={22}
-              className="text-gray-400"
-            />
-          )}
-          <span className="whitespace-nowrap capitalize">{s}</span>
-        </button>
-      ))}
+    <div className="flex justify-between p-2 mt-2">
+      <div className="flex flex-row gap-2 overflow-auto no-scrollbar">
+        {categories.map((s, i) => (
+          <button
+            key={`${i}_${s.substring(0, 3)}`}
+            className={`flex items-center gap-2 px-4 py-2 rounded-full ${
+              selectedCategory === s
+                ? "bg-gray-800 text-white"
+                : "bg-gray-200 hover:bg-gray-300 text-gray-500 font-semibold"
+            }`}
+            onClick={() => setSelectedCategory(s)}
+          >
+            {categoriesIcons[s] && (
+              <Icon
+                icon={categoriesIcons[s]}
+                fontSize={22}
+                className="text-gray-400"
+              />
+            )}
+            <span className="whitespace-nowrap capitalize">{s}</span>
+          </button>
+        ))}
+      </div>
+      <Key keys={["tab", "tabs"]} />
     </div>
   );
 
@@ -165,6 +163,7 @@ function Search() {
           <Key
             keys={isOpen ? ["'/' for commands"] : ["menu", "cmd", "e"]}
             isUppercase={!isOpen}
+            className={isOpen ? undefined : "px-4 py-2"}
           />
         </div>
         {isOpen && (
@@ -178,6 +177,18 @@ function Search() {
                 {suggestionsMapper}
                 {categoriesMapper}
                 {applicationsMapper}
+                <div className="flex justify-between p-4">
+                  <div className="flex gap-2 items-center">
+                    <Key keys={["arrows-y"]} className={"px-4 py-2"} />
+                    <span>Move</span>
+                  </div>
+                  <div className="flex gap-2 items-center">
+                    <Key keys={["enter"]} className={"px-4 py-2"} />
+                    <span>Open</span>
+                    <Key keys={["esc"]} className={"px-4 py-2"} />
+                    <span>Close</span>
+                  </div>
+                </div>
               </div>
             )}
           </>
