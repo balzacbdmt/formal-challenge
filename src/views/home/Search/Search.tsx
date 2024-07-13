@@ -9,6 +9,7 @@ import {
 } from "../../../constants/main";
 import Loading from "../../../components/loading/Loading";
 import { Application, Category } from "../../../constants/types";
+import Key from "../../../components/key/Key";
 
 function Search() {
   const [isOpen, setIsOpen] = useState(false);
@@ -123,17 +124,20 @@ function Search() {
             {applications
               .filter((a) => a.category === c)
               .map((a) => (
-                <button className="flex justify-between w-full p-2 rounded-xl hover:bg-white">
+                <button className="flex justify-between w-full p-2 pr-6 rounded-xl hover:bg-white">
                   <div className="flex items-center gap-3">
                     {a.icon && (
-                      <div className="p-2 rounded text-white" style={{ backgroundColor: categoriesColor[c] }}>
+                      <div
+                        className="p-2 rounded text-white"
+                        style={{ backgroundColor: categoriesColor[c] }}
+                      >
                         <Icon icon={a.icon} />
                       </div>
                     )}
                     <p className="text-black text-xl font-medium">{a.title}</p>
                     <p>{a.description}</p>
                   </div>
-                  <div>shortcut</div>
+                  <Key keys={a.shortcut} isUppercase />
                 </button>
               ))}
           </>
@@ -158,18 +162,10 @@ function Search() {
           ) : (
             <p className="text-2xl">Search for anything</p>
           )}
-          <div className={searchBarKeyClass}>
-            {isOpen ? (
-              <span>'/' for commands</span>
-            ) : (
-              <>
-                <Icon icon="ep:menu" />
-                <span className="flex items-center">
-                  <Icon icon="ph:command-bold" />E
-                </span>
-              </>
-            )}
-          </div>
+          <Key
+            keys={isOpen ? ["'/' for commands"] : ["menu", "cmd", "e"]}
+            isUppercase={!isOpen}
+          />
         </div>
         {isOpen && (
           <>
