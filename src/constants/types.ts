@@ -33,6 +33,6 @@ export type Command = {
   category: Category;
   title: string;
   description: string;
-  icon?: string;
+  icon: string;
   tags: string[];
 };

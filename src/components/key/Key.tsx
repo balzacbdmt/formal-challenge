@@ -4,9 +4,10 @@ interface Props {
   keys: string[];
   isUppercase?: boolean;
   className?: string;
+  onClick?: () => void;
 }
 
-function Key({ keys, isUppercase = false, className }: Props) {
+function Key({ keys, isUppercase = false, className, onClick }: Props) {
   const keyMapper = keys.map((k) => {
     switch (k) {
       case "opt":
@@ -38,9 +39,15 @@ function Key({ keys, isUppercase = false, className }: Props) {
   });
 
   return (
-    <div className={"bg-white flex items-center gap-2 rounded-lg shadow-sm py-1 px-2 " + className}>
+    <button
+      className={
+        "bg-white flex items-center gap-2 rounded-lg shadow-sm py-1 px-2 " +
+        className
+      }
+      onClick={onClick}
+    >
       {keyMapper}
-    </div>
+    </button>
   );
 }
 

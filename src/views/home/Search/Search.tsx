@@ -5,10 +5,11 @@ import {
   categoriesColor,
   categoriesIcons,
   getApplications,
+  getCommands,
   getSuggestions,
 } from "../../../constants/main";
 import Loading from "../../../components/loading/Loading";
-import { Application, Category } from "../../../constants/types";
+import { Application, Category, Command } from "../../../constants/types";
 import Key from "../../../components/key/Key";
 
 function Search() {
@@ -17,8 +18,11 @@ function Search() {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [applications, setApplications] = useState<Application[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
+  const [commands, setCommands] = useState<Command[]>([]);
+  const [commandsCategories, setCommandsCategories] = useState<Category[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<Category>("all");
   const [inputValue, setInputValue] = useState("");
+  const [mode, setMode] = useState<"applications" | "commands">("applications");
 
   // Add shorkeys
 
@@ -34,6 +38,13 @@ function Search() {
         setCategories([
           "all",
           ...new Set(fetchedApplications.map((a) => a.category)),
+        ]);
+
+        const fetchedCommands = await getCommands();
+        setCommands(fetchedCommands);
+        setCommandsCategories([
+          "all",
+          ...new Set(fetchedCommands.map((a) => a.category)),
         ]);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -66,6 +77,16 @@ function Search() {
     if (!isOpen) {
       setIsOpen(true);
     }
+  }
+
+  function searchBarButtonValue() {
+    if (isOpen) {
+      if (mode === "commands") {
+        return ["enter", "Run Command"];
+      }
+      return ["'/' for commands"];
+    }
+    return ["menu", "cmd", "e"];
   }
 
   const suggestionsMapper = (
@@ -139,18 +160,60 @@ function Search() {
               .map((a) => (
                 <button className="flex justify-between w-full p-2 pr-6 rounded-xl hover:bg-white">
                   <div className="flex items-center gap-3">
-                    {a.icon && (
-                      <div
-                        className="p-2 rounded text-white"
-                        style={{ backgroundColor: categoriesColor[c] }}
-                      >
-                        <Icon icon={a.icon} />
-                      </div>
-                    )}
+                    <div
+                      className="p-2 rounded text-white"
+                      style={{ backgroundColor: categoriesColor[c] }}
+                    >
+                      <Icon icon={a.icon} />
+                    </div>
                     <p className="text-black text-xl font-medium">{a.title}</p>
                     <p>{a.description}</p>
                   </div>
                   <Key keys={a.shortcut} isUppercase />
+                </button>
+              ))}
+          </>
+        ))}
+    </div>
+  );
+
+  const commandsMapper = (
+    <div className="flex-1 overflow-scroll pb-4">
+      {commandsCategories
+        .filter((c) => c !== "all")
+        .map((cc) => (
+          <>
+            {!inputValue && (
+              <h4 className="font-medium uppercase pl-2 pt-4 tracking-wider">
+                {cc}
+              </h4>
+            )}
+            {commands
+              .filter((c) => c.category === cc)
+              .filter((c) =>
+                inputValue
+                  ? c.title.toLowerCase().includes(inputValue.toLowerCase())
+                  : true
+              )
+              .map((c) => (
+                <button className="flex items-center gap-3 w-full p-2 pr-6 rounded-xl hover:bg-white">
+                  <div className="p-2 rounded bg-white">
+                    <Icon icon={c.icon} />
+                  </div>
+                  <p className="text-black text-xl font-medium">{c.title}</p>
+                  {c.tags.map((t, i) => (
+                    <span
+                      className={
+                        "py-1 px-2 text-sm rounded " +
+                        (i > 0
+                          ? "bg-green-200 text-green-600"
+                          : "bg-blue-200 text-blue-600")
+                      }
+                    >
+                      {t}
+                    </span>
+                  ))}
+                  <p>{c.description}</p>
                 </button>
               ))}
           </>
@@ -178,9 +241,14 @@ function Search() {
             <p className="text-2xl">Search for anything</p>
           )}
           <Key
-            keys={isOpen ? ["'/' for commands"] : ["menu", "cmd", "e"]}
+            keys={searchBarButtonValue()}
             isUppercase={!isOpen}
             className={isOpen ? undefined : "px-4 py-2"}
+            onClick={
+              isOpen && mode === "applications"
+                ? () => setMode("commands")
+                : undefined
+            }
           />
         </div>
         {isOpen && (
@@ -191,21 +259,27 @@ function Search() {
               </div>
             ) : (
               <div className="flex flex-col opacity-0 animate-fade-in overflow-hidden h-full">
-                {suggestionsMapper}
-                {categoriesMapper}
-                {applicationsMapper}
-                <div className="flex justify-between p-4">
-                  <div className="flex gap-2 items-center">
-                    <Key keys={["arrows-y"]} className={"px-4 py-2"} />
-                    <span>Move</span>
-                  </div>
-                  <div className="flex gap-2 items-center">
-                    <Key keys={["enter"]} className={"px-4 py-2"} />
-                    <span>Open</span>
-                    <Key keys={["esc"]} className={"px-4 py-2"} />
-                    <span>Close</span>
-                  </div>
-                </div>
+                {mode === "applications" ? (
+                  <>
+                    {suggestionsMapper}
+                    {categoriesMapper}
+                    {applicationsMapper}
+                    <div className="flex justify-between p-4">
+                      <div className="flex gap-2 items-center">
+                        <Key keys={["arrows-y"]} className={"px-4 py-2"} />
+                        <span>Move</span>
+                      </div>
+                      <div className="flex gap-2 items-center">
+                        <Key keys={["enter"]} className={"px-4 py-2"} />
+                        <span>Open</span>
+                        <Key keys={["esc"]} className={"px-4 py-2"} />
+                        <span>Close</span>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  commandsMapper
+                )}
               </div>
             )}
           </>
