@@ -30,7 +30,7 @@ function BarChart() {
   }, [cols]);
 
   return (
-    <div className="flex flex-1 items-end gap-1.5" ref={containerRef}>
+    <div className="flex flex-1 items-end gap-1 justify-around" ref={containerRef}>
       {cols.map((c, i) => (
         <div
           key={`${i}_${c}`}
