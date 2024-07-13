@@ -237,3 +237,10 @@ export const applications: Application[] = [
     shortcut: ["opt", "s", "d"],
   },
 ];
+
+export const suggestions: string[] = [
+  "How many times user X has made Y ?",
+  "How many times has user group X has made Y query ?",
+  "How many times user X has made Y from Z ?",
+  "How many times has user group X has made Y query from Z ?",
+]
