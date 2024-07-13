@@ -141,15 +141,19 @@ function Search() {
             )}
           </div>
         </div>
-        {isLoading ? (
-          <div className="flex justify-center items-center h-full">
-            <Loading />
-          </div>
-        ) : (
-          <div className="opacity-0 animate-fade-in">
-            {isOpen && suggestionsMapper}
-            {isOpen && categoriesMapper}
-          </div>
+        {isOpen && (
+          <>
+            {isLoading ? (
+              <div className="flex justify-center items-center h-full">
+                <Loading />
+              </div>
+            ) : (
+              <div className="opacity-0 animate-fade-in">
+                {suggestionsMapper}
+                {categoriesMapper}
+              </div>
+            )}
+          </>
         )}
       </div>
       <div className={backgroundClass} onClick={() => setIsOpen(false)} />
