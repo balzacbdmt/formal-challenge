@@ -1,4 +1,5 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
+import { join } from "../../constants/helpers";
 
 interface Props {
   keys: string[];
@@ -7,28 +8,29 @@ interface Props {
   onClick?: () => void;
 }
 
-function Key({ keys, isUppercase = false, className, onClick }: Props) {
+function Key({ keys, isUppercase = false, className = "", onClick }: Props) {
   const keyMapper = keys.map((k) => {
     switch (k) {
       case "opt":
-        return <Icon icon="ph:option" />;
+        return <Icon key={k} icon="ph:option" />;
       case "shift":
-        return <Icon icon="f7:shift" />;
+        return <Icon key={k} icon="f7:shift" />;
       case "menu":
-        return <Icon icon="ep:menu" />;
+        return <Icon key={k} icon="ep:menu" />;
       case "cmd":
-        return <Icon icon="ph:command-bold" />;
+        return <Icon key={k} icon="ph:command-bold" />;
       case "tab":
-        return <Icon icon="icomoon-free:tab" />;
+        return <Icon key={k} icon="icomoon-free:tab" />;
       case "arrows-y":
-        return <Icon icon="tabler:arrows-sort" />;
+        return <Icon key={k} icon="tabler:arrows-sort" />;
       case "enter":
-        return <Icon icon="mi:enter" />;
+        return <Icon key={k} icon="mi:enter" />;
       case "esc":
-        return <Icon icon="mdi:keyboard-esc" />;
+        return <Icon key={k} icon="mdi:keyboard-esc" />;
       default:
         return (
           <span
+            key={k}
             className="min-w-[1ch]"
             style={{ textTransform: isUppercase ? "uppercase" : undefined }}
           >
@@ -38,16 +40,16 @@ function Key({ keys, isUppercase = false, className, onClick }: Props) {
     }
   });
 
+  const keyClass = join([
+    "bg-white flex items-center gap-2 rounded-lg shadow-sm py-1 px-2 ",
+    className,
+    onClick ? "cursor-pointer" : "",
+  ]);
+
   return (
-    <button
-      className={
-        "bg-white flex items-center gap-2 rounded-lg shadow-sm py-1 px-2 " +
-        className
-      }
-      onClick={onClick}
-    >
+    <div className={keyClass} onClick={onClick}>
       {keyMapper}
-    </button>
+    </div>
   );
 }
 

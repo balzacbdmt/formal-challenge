@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { join } from "../../../constants/helpers";
 import {
   categoriesColor,
@@ -144,7 +144,7 @@ function Search() {
           selectedCategory !== "all" ? c === selectedCategory : true
         )
         .map((c) => (
-          <>
+          <Fragment key={c}>
             {!inputValue && (
               <h4 className="font-medium uppercase pl-2 pt-4 tracking-wider">
                 {c}
@@ -158,7 +158,10 @@ function Search() {
                   : true
               )
               .map((a) => (
-                <button className="flex justify-between w-full p-2 pr-6 rounded-xl hover:bg-white">
+                <button
+                  key={a.id}
+                  className="flex justify-between w-full p-2 pr-6 rounded-xl hover:bg-white"
+                >
                   <div className="flex items-center gap-3">
                     <div
                       className="p-2 rounded text-white"
@@ -172,7 +175,7 @@ function Search() {
                   <Key keys={a.shortcut} isUppercase />
                 </button>
               ))}
-          </>
+          </Fragment>
         ))}
     </div>
   );
@@ -182,7 +185,7 @@ function Search() {
       {commandsCategories
         .filter((c) => c !== "all")
         .map((cc) => (
-          <>
+          <Fragment key={cc}>
             {!inputValue && (
               <h4 className="font-medium uppercase pl-2 pt-4 tracking-wider">
                 {cc}
@@ -196,13 +199,17 @@ function Search() {
                   : true
               )
               .map((c) => (
-                <button className="flex items-center gap-3 w-full p-2 pr-6 rounded-xl hover:bg-white">
+                <button
+                  key={c.id}
+                  className="flex items-center gap-3 w-full p-2 pr-6 rounded-xl hover:bg-white"
+                >
                   <div className="p-2 rounded bg-white">
                     <Icon icon={c.icon} />
                   </div>
                   <p className="text-black text-xl font-medium">{c.title}</p>
                   {c.tags.map((t, i) => (
                     <span
+                      key={t}
                       className={
                         "py-1 px-2 text-sm rounded " +
                         (i > 0
@@ -216,7 +223,7 @@ function Search() {
                   <p>{c.description}</p>
                 </button>
               ))}
-          </>
+          </Fragment>
         ))}
     </div>
   );
