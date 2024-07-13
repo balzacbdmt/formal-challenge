@@ -59,7 +59,7 @@ export const applications: Application[] = [
     title: "Catalog",
     description: "Description of application",
     icon: "ion:folder-outline",
-    shortcut: ["opt", "c"],
+    shortcut: ["cmd", "c"],
   },
   {
     id: 2,
@@ -67,7 +67,7 @@ export const applications: Application[] = [
     title: "Observability",
     description: "Description of application",
     icon: "fluent:eye-32-regular",
-    shortcut: ["opt", "o"],
+    shortcut: ["cmd", "o"],
   },
   {
     id: 3,
@@ -75,7 +75,7 @@ export const applications: Application[] = [
     title: "Lineage",
     description: "Description of application",
     icon: "ph:tree-structure",
-    shortcut: ["opt", "l"],
+    shortcut: ["cmd", "l"],
   },
   {
     id: 4,
@@ -83,7 +83,7 @@ export const applications: Application[] = [
     title: "ETL",
     description: "Description of application",
     icon: "bi:shuffle",
-    shortcut: ["opt", "e"],
+    shortcut: ["cmd", "e"],
   },
   {
     id: 5,
@@ -91,7 +91,7 @@ export const applications: Application[] = [
     title: "Access",
     description: "Description of application",
     icon: "streamline:user-check-validate",
-    shortcut: ["opt", "a"],
+    shortcut: ["cmd", "a"],
   },
   {
     id: 6,
@@ -99,7 +99,7 @@ export const applications: Application[] = [
     title: "Logs",
     description: "Description of application",
     icon: "ion:warning-outline",
-    shortcut: ["opt", "g"],
+    shortcut: ["cmd", "g"],
   },
   {
     id: 7,
@@ -107,7 +107,7 @@ export const applications: Application[] = [
     title: "Discovery",
     description: "Description of application",
     icon: "tabler:compass",
-    shortcut: ["opt", "d"],
+    shortcut: ["cmd", "d"],
   },
   {
     id: 8,
@@ -115,7 +115,7 @@ export const applications: Application[] = [
     title: "Policies",
     description: "Description of application",
     icon: "bx:file",
-    shortcut: ["opt", "p"],
+    shortcut: ["cmd", "p"],
   },
   {
     id: 9,
@@ -123,7 +123,7 @@ export const applications: Application[] = [
     title: "Compliance",
     description: "Description of application",
     icon: "grommet-icons:compliance",
-    shortcut: ["opt", "q"],
+    shortcut: ["cmd", "q"],
   },
   {
     id: 10,
@@ -131,7 +131,7 @@ export const applications: Application[] = [
     title: "AWS",
     description: "Description of application",
     icon: "cib:amazon-aws",
-    shortcut: ["opt", "shift", "a"],
+    shortcut: ["cmd", "shift", "a"],
   },
   {
     id: 11,
@@ -139,7 +139,7 @@ export const applications: Application[] = [
     title: "Datadog",
     description: "Description of application",
     icon: "simple-icons:datadog",
-    shortcut: ["opt", "shift", "d"],
+    shortcut: ["cmd", "shift", "d"],
   },
   {
     id: 12,
@@ -147,7 +147,7 @@ export const applications: Application[] = [
     title: "Splunk",
     description: "Description of application",
     icon: "simple-icons:splunk",
-    shortcut: ["opt", "shift", "s"],
+    shortcut: ["cmd", "shift", "s"],
   },
   {
     id: 13,
@@ -155,7 +155,7 @@ export const applications: Application[] = [
     title: "S3",
     description: "Description of application",
     icon: "simple-icons:amazons3",
-    shortcut: ["opt", "shift", "3"],
+    shortcut: ["cmd", "shift", "3"],
   },
   {
     id: 14,
@@ -163,7 +163,7 @@ export const applications: Application[] = [
     title: "Github",
     description: "Description of application",
     icon: "mdi:github",
-    shortcut: ["opt", "shift", "g"],
+    shortcut: ["cmd", "shift", "g"],
   },
   {
     id: 15,
@@ -171,7 +171,7 @@ export const applications: Application[] = [
     title: "datahub",
     description: "Description of application",
     icon: "maki:cross",
-    shortcut: ["opt", "shift", "h"],
+    shortcut: ["cmd", "shift", "h"],
   },
   {
     id: 16,
@@ -179,7 +179,7 @@ export const applications: Application[] = [
     title: "Manage Store apps",
     description: "Description of application",
     icon: "maki:cross",
-    shortcut: ["opt", "shift", "m"],
+    shortcut: ["cmd", "shift", "m"],
   },
   {
     id: 17,
@@ -187,7 +187,7 @@ export const applications: Application[] = [
     title: "API Keys",
     description: "Description of application",
     icon: "fe:key",
-    shortcut: ["opt", "k"],
+    shortcut: ["cmd", "k"],
   },
   {
     id: 18,
@@ -195,7 +195,7 @@ export const applications: Application[] = [
     title: "Sigma",
     description: "Description of application",
     icon: "mdi:sigma",
-    shortcut: ["opt", "s"],
+    shortcut: ["cmd", "s"],
   },
   {
     id: 19,
@@ -203,7 +203,7 @@ export const applications: Application[] = [
     title: "Workflow",
     description: "Description of application",
     icon: "ph:tree-structure-light",
-    shortcut: ["opt", "w"],
+    shortcut: ["cmd", "w"],
   },
   {
     id: 20,
@@ -211,7 +211,7 @@ export const applications: Application[] = [
     title: "Settings A",
     description: "Description of application",
     icon: "material-symbols:settings",
-    shortcut: ["opt", "s", "a"],
+    shortcut: ["ctrl", "1"],
   },
   {
     id: 21,
@@ -219,7 +219,7 @@ export const applications: Application[] = [
     title: "Settings B",
     description: "Description of application",
     icon: "material-symbols:settings",
-    shortcut: ["opt", "s", "b"],
+    shortcut: ["ctrl", "2"],
   },
   {
     id: 22,
@@ -227,7 +227,7 @@ export const applications: Application[] = [
     title: "Settings C",
     description: "Description of application",
     icon: "material-symbols:settings",
-    shortcut: ["opt", "s", "c"],
+    shortcut: ["ctrl", "3"],
   },
   {
     id: 23,
@@ -235,7 +235,7 @@ export const applications: Application[] = [
     title: "Settings D",
     description: "Description of application",
     icon: "material-symbols:settings",
-    shortcut: ["opt", "s", "d"],
+    shortcut: ["ctrl", "4"],
   },
 ];
 

@@ -19,6 +19,8 @@ function Key({ keys, isUppercase = false, className = "", onClick }: Props) {
         return <Icon key={k} icon="ep:menu" />;
       case "cmd":
         return <Icon key={k} icon="ph:command-bold" />;
+      case "ctrl":
+        return <Icon key={k} icon="icomoon-free:ctrl" />;
       case "tab":
         return <Icon key={k} icon="icomoon-free:tab" />;
       case "arrows-y":
