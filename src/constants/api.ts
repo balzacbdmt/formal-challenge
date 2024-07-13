@@ -170,6 +170,7 @@ export const applications: Application[] = [
     category: "store",
     title: "datahub",
     description: "Description of application",
+    icon: "maki:cross",
     shortcut: ["opt", "shift", "h"],
   },
   {
@@ -177,7 +178,7 @@ export const applications: Application[] = [
     category: "store",
     title: "Manage Store apps",
     description: "Description of application",
-    icon: "",
+    icon: "maki:cross",
     shortcut: ["opt", "shift", "m"],
   },
   {

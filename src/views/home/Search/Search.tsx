@@ -25,7 +25,6 @@ function Search() {
         setIsLoading(true);
 
         setSuggestions(await getSuggestions());
-        console.log(await getSuggestions());
 
         const fetchedApplications = await getApplications();
         setApplications(fetchedApplications);
@@ -46,7 +45,7 @@ function Search() {
   const containerClassName = join([
     "fixed text-gray-400 transition-all duration-300 z-50",
     isOpen
-      ? "top-20 right-48 left-48 h-[80vh] rounded-2xl bg-slate-100 p-1.5"
+      ? "top-20 right-48 left-48 h-[80vh] rounded-2xl bg-slate-100 p-1.5 flex flex-col overflow-hidden"
       : "top-0 right-0 left-0 flex h-20 items-center bg-slate-200 cursor-pointer",
   ]);
 
@@ -111,6 +110,36 @@ function Search() {
     </div>
   );
 
+  const applicationsMapper = (
+    <div className="flex-1 overflow-scroll pb-4">
+      {categories
+        .filter((c) => c !== "all")
+        .map((c) => (
+          <>
+            <h4 className="font-medium uppercase pl-2 pt-4 tracking-wider">
+              {c}
+            </h4>
+            {applications
+              .filter((a) => a.category === c)
+              .map((a) => (
+                <button className="flex justify-between w-full p-2 rounded-xl hover:bg-white">
+                  <div className="flex items-center gap-3">
+                    {a.icon && (
+                      <div className="p-2 bg-blue-700 rounded text-white">
+                        <Icon icon={a.icon} />
+                      </div>
+                    )}
+                    <p className="text-black text-xl font-medium">{a.title}</p>
+                    <p>{a.description}</p>
+                  </div>
+                  <div>shortcut</div>
+                </button>
+              ))}
+          </>
+        ))}
+    </div>
+  );
+
   return (
     <>
       <div className={containerClassName} onClick={handleSearch}>
@@ -148,9 +177,10 @@ function Search() {
                 <Loading />
               </div>
             ) : (
-              <div className="opacity-0 animate-fade-in">
+              <div className="flex flex-col opacity-0 animate-fade-in overflow-hidden">
                 {suggestionsMapper}
                 {categoriesMapper}
+                {applicationsMapper}
               </div>
             )}
           </>

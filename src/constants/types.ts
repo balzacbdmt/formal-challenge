@@ -24,7 +24,7 @@ export type Application = {
   category: Category;
   title: string;
   description: string;
-  icon?: string;
+  icon: string;
   shortcut: string[];
 };
 
