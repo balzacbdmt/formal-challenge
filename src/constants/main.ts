@@ -43,3 +43,12 @@ export const categoriesIcons: Record<Category, string | undefined> = {
   tools: "maki:cross",
   settings: "mage:settings",
 };
+
+export const categoriesColor: Record<Category, string | undefined> = {
+  all: undefined,
+  data: "#708bff",
+  security: "blue",
+  store: "#2e2e2e",
+  tools: "#586fff",
+  settings: "gray",
+};

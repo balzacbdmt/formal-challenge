@@ -2,6 +2,7 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import { useEffect, useState } from "react";
 import { join } from "../../../constants/helpers";
 import {
+  categoriesColor,
   categoriesIcons,
   getApplications,
   getSuggestions,
@@ -125,7 +126,7 @@ function Search() {
                 <button className="flex justify-between w-full p-2 rounded-xl hover:bg-white">
                   <div className="flex items-center gap-3">
                     {a.icon && (
-                      <div className="p-2 bg-blue-700 rounded text-white">
+                      <div className="p-2 rounded text-white" style={{ backgroundColor: categoriesColor[c] }}>
                         <Icon icon={a.icon} />
                       </div>
                     )}
