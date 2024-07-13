@@ -1,4 +1,5 @@
 import { applications, cards, commands, suggestions } from "./api";
+import { Category } from "./types";
 
 // Generate a random delay for fake fetch from 100 to 4100 ms
 function randomDelay() {
@@ -33,3 +34,12 @@ export async function getCommands() {
   await randomDelay();
   return commands;
 }
+
+export const categoriesIcons: Record<Category, string | undefined> = {
+  all: undefined,
+  data: "maki:cross",
+  security: "majesticons:lock-line",
+  store: "maki:cross",
+  tools: "maki:cross",
+  settings: "mage:settings",
+};

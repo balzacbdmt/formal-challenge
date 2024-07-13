@@ -1,23 +1,46 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useEffect, useState } from "react";
 import { join } from "../../../constants/helpers";
-import { getSuggestions } from "../../../constants/main";
+import {
+  categoriesIcons,
+  getApplications,
+  getSuggestions,
+} from "../../../constants/main";
 import Loading from "../../../components/loading/Loading";
+import { Application, Category } from "../../../constants/types";
 
 function Search() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [applications, setApplications] = useState<Application[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<Category>("all");
 
   // Add shorkeys
 
   useEffect(() => {
-    setIsLoading(true);
-    getSuggestions().then((suggestions: string[]) => {
-      setSuggestions(suggestions);
-      setIsLoading(false);
-    });
-    // Here, we can add a catch for any errors due to fetching data
+    const fetchDataAsync = async () => {
+      try {
+        setIsLoading(true);
+
+        setSuggestions(await getSuggestions());
+        console.log(await getSuggestions());
+
+        const fetchedApplications = await getApplications();
+        setApplications(fetchedApplications);
+        setCategories([
+          "all",
+          ...new Set(fetchedApplications.map((a) => a.category)),
+        ]);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchDataAsync();
   }, []);
 
   const containerClassName = join([
@@ -63,6 +86,31 @@ function Search() {
     </div>
   );
 
+  const categoriesMapper = (
+    <div className="flex flex-row gap-2 overflow-auto no-scrollbar p-2 mt-2">
+      {categories.map((s, i) => (
+        <button
+          key={`${i}_${s.substring(0, 3)}`}
+          className={`flex items-center gap-2 px-4 py-2 rounded-full ${
+            selectedCategory === s
+              ? "bg-gray-800 text-white"
+              : "bg-gray-200 hover:bg-gray-300 text-gray-500 font-semibold"
+          }`}
+          onClick={() => setSelectedCategory(s)}
+        >
+          {categoriesIcons[s] && (
+            <Icon
+              icon={categoriesIcons[s]}
+              fontSize={22}
+              className="text-gray-400"
+            />
+          )}
+          <span className="whitespace-nowrap capitalize">{s}</span>
+        </button>
+      ))}
+    </div>
+  );
+
   return (
     <>
       <div className={containerClassName} onClick={handleSearch}>
@@ -100,6 +148,7 @@ function Search() {
         ) : (
           <div className="opacity-0 animate-fade-in">
             {isOpen && suggestionsMapper}
+            {isOpen && categoriesMapper}
           </div>
         )}
       </div>

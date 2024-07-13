@@ -11,7 +11,13 @@ export type Card = {
   dataUpdatedAt?: number;
 };
 
-type Category = "data" | "security" | "store" | "tools" | "settings";
+export type Category =
+  | "all"
+  | "data"
+  | "security"
+  | "store"
+  | "tools"
+  | "settings";
 
 export type Application = {
   id: number;
@@ -29,4 +35,4 @@ export type Command = {
   description: string;
   icon?: string;
   tags: string[];
-}
+};
