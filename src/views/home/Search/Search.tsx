@@ -18,6 +18,7 @@ function Search() {
   const [applications, setApplications] = useState<Application[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<Category>("all");
+  const [inputValue, setInputValue] = useState("");
 
   // Add shorkeys
 
@@ -88,11 +89,15 @@ function Search() {
         {categories.map((s, i) => (
           <button
             key={`${i}_${s.substring(0, 3)}`}
-            className={`flex items-center gap-2 px-4 py-2 rounded-full ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors font-semibold ${
               selectedCategory === s
                 ? "bg-gray-800 text-white"
-                : "bg-gray-200 hover:bg-gray-300 text-gray-500 font-semibold"
+                : "bg-gray-200 hover:bg-gray-300 text-gray-500"
             }`}
+            style={{
+              backgroundColor:
+                selectedCategory === s ? categoriesColor[s] : undefined,
+            }}
             onClick={() => setSelectedCategory(s)}
           >
             {categoriesIcons[s] && (
@@ -114,13 +119,23 @@ function Search() {
     <div className="flex-1 overflow-scroll pb-4">
       {categories
         .filter((c) => c !== "all")
+        .filter((c) =>
+          selectedCategory !== "all" ? c === selectedCategory : true
+        )
         .map((c) => (
           <>
-            <h4 className="font-medium uppercase pl-2 pt-4 tracking-wider">
-              {c}
-            </h4>
+            {!inputValue && (
+              <h4 className="font-medium uppercase pl-2 pt-4 tracking-wider">
+                {c}
+              </h4>
+            )}
             {applications
               .filter((a) => a.category === c)
+              .filter((a) =>
+                inputValue
+                  ? a.title.toLowerCase().includes(inputValue.toLowerCase())
+                  : true
+              )
               .map((a) => (
                 <button className="flex justify-between w-full p-2 pr-6 rounded-xl hover:bg-white">
                   <div className="flex items-center gap-3">
@@ -155,6 +170,8 @@ function Search() {
                 className="bg-transparent text-xl flex-1 pl-2 focus:outline-none"
                 placeholder="Find info, Ask questions or Run queries"
                 disabled={isLoading}
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
               />
             </>
           ) : (
@@ -173,7 +190,7 @@ function Search() {
                 <Loading />
               </div>
             ) : (
-              <div className="flex flex-col opacity-0 animate-fade-in overflow-hidden">
+              <div className="flex flex-col opacity-0 animate-fade-in overflow-hidden h-full">
                 {suggestionsMapper}
                 {categoriesMapper}
                 {applicationsMapper}
