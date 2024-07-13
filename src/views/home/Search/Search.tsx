@@ -2,6 +2,7 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import { useEffect, useState } from "react";
 import { join } from "../../../constants/helpers";
 import { getSuggestions } from "../../../constants/main";
+import Loading from "../../../components/loading/Loading";
 
 function Search() {
   const [isOpen, setIsOpen] = useState(false);
@@ -73,6 +74,7 @@ function Search() {
                 type="text"
                 className="bg-transparent text-xl flex-1 pl-2 focus:outline-none"
                 placeholder="Find info, Ask questions or Run queries"
+                disabled={isLoading}
               />
             </>
           ) : (
@@ -91,7 +93,15 @@ function Search() {
             )}
           </div>
         </div>
-        {isOpen && suggestionsMapper}
+        {isLoading ? (
+          <div className="flex justify-center items-center h-full">
+            <Loading />
+          </div>
+        ) : (
+          <div className="opacity-0 animate-fade-in">
+            {isOpen && suggestionsMapper}
+          </div>
+        )}
       </div>
       <div className={backgroundClass} onClick={() => setIsOpen(false)} />
     </>
