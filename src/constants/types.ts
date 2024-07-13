@@ -10,3 +10,12 @@ export type Card = {
   dataType: DataType;
   dataUpdatedAt?: number;
 };
+
+export type Application = {
+  id: number;
+  category: "data" | "security" | "store" | "tools" | "settings";
+  title: string;
+  description: string;
+  icon?: string;
+  shortcut: string[];
+};
