@@ -24,9 +24,9 @@ function Search() {
     isOpen ? "bg-slate-200 py-3 px-6" : "px-12",
   ]);
 
-  const searchBarKey = join([
+  const searchBarKeyClass = join([
     "bg-white flex items-center gap-2 rounded-lg shadow-sm",
-    isOpen ? "py-1 px-2" : "py-2 px-4"
+    isOpen ? "py-1 px-2" : "py-2 px-4",
   ]);
 
   function handleSearch() {
@@ -51,7 +51,7 @@ function Search() {
           ) : (
             <p className="text-2xl">Search for anything</p>
           )}
-          <div className={searchBarKey}>
+          <div className={searchBarKeyClass}>
             {isOpen ? (
               <span>'/' for commands</span>
             ) : (
