@@ -1,4 +1,4 @@
-import { Card, Application } from "./types";
+import { Card, Application, Command } from "./types";
 
 export const cards: Card[] = [
   {
@@ -243,4 +243,79 @@ export const suggestions: string[] = [
   "How many times has user group X has made Y query ?",
   "How many times user X has made Y from Z ?",
   "How many times has user group X has made Y query from Z ?",
-]
+];
+
+export const commands: Command[] = [
+  {
+    id: 1,
+    category: "data",
+    title: "catalog search",
+    description: "Search the data catalog for datasets using a keyword.",
+    icon: "material-symbols:search",
+    tags: ["Keyword"],
+  },
+  {
+    id: 2,
+    category: "data",
+    title: "observability status",
+    description: "Check the observability status of a specific dataset.",
+    icon: "fluent:eye-32-regular",
+    tags: ["Dataset"],
+  },
+  {
+    id: 3,
+    category: "data",
+    title: "etl Run",
+    description: "Run an ETL job by specifying its name.",
+    icon: "bi:shuffle",
+    tags: ["Job Name"],
+  },
+  {
+    id: 4,
+    category: "security",
+    title: "access grant",
+    description: "Grant access to a specific user for a resource.",
+    icon: "streamline:user-check-validate",
+    tags: ["User", "Resource"],
+  },
+  {
+    id: 5,
+    category: "security",
+    title: "logs view",
+    description: "View security logs for a specific data and log type.",
+    icon: "ion:warning-outline",
+    tags: ["Data", "Type"],
+  },
+  {
+    id: 6,
+    category: "security",
+    title: "policies create",
+    description: "Create a security policy with specified rules.",
+    icon: "bx:file",
+    tags: ["PolicyName", "Rules"],
+  },
+  {
+    id: 7,
+    category: "tools",
+    title: "apikeys create",
+    description: "Create an API key with a given name.",
+    icon: "fe:key",
+    tags: ["Name"],
+  },
+  {
+    id: 8,
+    category: "tools",
+    title: "sigma analyze",
+    description: "Analyze data using Sigma notation.",
+    icon: "mdi:sigma",
+    tags: ["Query"],
+  },
+  {
+    id: 9,
+    category: "tools",
+    title: "workflow start",
+    description: "Start a workflow by specifying its name.",
+    icon: "ph:tree-structure-light",
+    tags: ["workflow"],
+  },
+];

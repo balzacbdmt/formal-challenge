@@ -11,11 +11,22 @@ export type Card = {
   dataUpdatedAt?: number;
 };
 
+type Category = "data" | "security" | "store" | "tools" | "settings";
+
 export type Application = {
   id: number;
-  category: "data" | "security" | "store" | "tools" | "settings";
+  category: Category;
   title: string;
   description: string;
   icon?: string;
   shortcut: string[];
 };
+
+export type Command = {
+  id: number;
+  category: Category;
+  title: string;
+  description: string;
+  icon?: string;
+  tags: string[];
+}
