@@ -216,7 +216,7 @@ function Search() {
       {suggestions.map((s, i) => (
         <button
           key={`${i}_${s.substring(0, 3)}`}
-          className="flex items-center gap-2 bg-gray-light px-4 py-2 rounded-full hover:bg-gray"
+          className="flex items-center gap-2 bg-gray-light px-4 py-2 rounded-full outline-none hover:bg-gray"
           onClick={() => alert(s)}
         >
           <Icon icon="lucide:sparkle" />
@@ -232,7 +232,7 @@ function Search() {
         {categories.map((s, i) => (
           <button
             key={`${i}_${s.substring(0, 3)}`}
-            className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors font-medium ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors font-medium outline-none ${
               selectedCategory === s
                 ? "bg-black text-white"
                 : "bg-gray-light hover:bg-gray text-black"
@@ -285,7 +285,7 @@ function Search() {
                   .map((a) => {
                     rowIndex++;
                     const className = join([
-                      "flex justify-between items-center w-full p-2 sm:pr-6 rounded-xl hover:bg-white",
+                      "flex justify-between items-center w-full p-2 sm:pr-6 rounded-xl outline-none hover:bg-white",
                       rowIndex === preSelectedIndex ? "bg-white" : "",
                     ]);
                     return (
@@ -295,6 +295,7 @@ function Search() {
                         className={className}
                         onMouseOver={() => setPreSelectedIndex(null)}
                         data-application-id={a.id}
+                        onClick={() => alert(a.title)}
                       >
                         <div className="flex items-center gap-3">
                           <div
@@ -325,13 +326,19 @@ function Search() {
 
   const commandsMapper = () => {
     let rowIndex = 0;
+
+    let inputValueWithoutSlash = inputValue;
+    if (inputValueWithoutSlash.startsWith("/")) {
+      inputValueWithoutSlash = inputValueWithoutSlash.substring(1);
+    }
+
     return (
       <div className="flex-1 overflow-scroll pb-4">
         {commandsCategories
           .filter((c) => c !== "all")
           .map((cc) => (
             <Fragment key={cc}>
-              {!inputValue && (
+              {!inputValueWithoutSlash && (
                 <h4 className="font-medium uppercase pl-2 pt-4 tracking-wider">
                   {cc}
                 </h4>
@@ -340,13 +347,13 @@ function Search() {
                 .filter((c) => c.category === cc)
                 .filter((c) =>
                   inputValue
-                    ? c.title.toLowerCase().includes(inputValue.toLowerCase())
+                    ? c.title.toLowerCase().includes(inputValueWithoutSlash.toLowerCase())
                     : true
                 )
                 .map((c) => {
                   rowIndex++;
                   const className = join([
-                    "flex items-center gap-3 w-full p-2 pr-6 rounded-xl hover:bg-white",
+                    "flex items-center gap-3 w-full p-2 pr-6 rounded-xl outline-none hover:bg-white",
                     rowIndex === preSelectedIndex ? "bg-white" : "",
                   ]);
                   return (
@@ -356,6 +363,7 @@ function Search() {
                       id={`command_${rowIndex}`}
                       onMouseOver={() => setPreSelectedIndex(null)}
                       data-application-id={c.id}
+                      onClick={() => alert(c.title)}
                     >
                       <div className="p-2 rounded bg-white">
                         <Icon icon={c.icon} />
