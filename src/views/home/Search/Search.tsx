@@ -147,7 +147,7 @@ function Search() {
     return () => {
       window.removeEventListener("keydown", onKeyPress);
     };
-  }, [isOpen, selectedCategory, preSelectedIndex]);
+  }, [isLoading, isOpen, selectedCategory, preSelectedIndex]);
 
   // Auto scroll on keyboard event
   useEffect(() => {
