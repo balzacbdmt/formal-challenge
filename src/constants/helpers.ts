@@ -34,4 +34,6 @@ export function formatNumberWithCommas(number: number): string {
  * @example
  * join(["A", "B", "C"]) => "A B C"
  */
-export const join = (items: (string | number)[]) => items.join(" ");
+export function join(items: (string | number)[]) {
+  return items.join(" ");
+}
