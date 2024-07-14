@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Card from "./Card/Card";
 import { getCards } from "../../constants/main";
 import { Card as CardType } from "../../constants/types";
@@ -10,39 +10,54 @@ function Home() {
 
   useEffect(() => {
     setIsLoading(true);
-    getCards().then((cards: CardType[]) => {
-      setCards(cards);
-      setIsLoading(false);
-    });
-    // Here, we can add a catch for any errors due to fetching data
+    getCards()
+      .then((cards: CardType[]) => {
+        setCards(cards);
+      })
+      .catch(() => {
+        // Here, we can add a catch for any errors due to fetching data
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
 
-  function cardsMap(category: string) {
-    return (
-      <div className="px-6 md:px-12 flex flex-col md:flex-row gap-4 overflow-x-auto no-scrollbar">
-        {isLoading ? (
-          <Card isLoading={true} />
-        ) : (
-          cards
-            .filter((c) => c.category === category)
-            .map((c, index) => (
-              <Card
-                isLoading={false}
-                key={c.id}
-                title={c.title}
-                updatedAt={c.updatedAt}
-                logsCount={c.logsCount}
-                dataName={c.dataName}
-                dataType={c.dataType}
-                dataUpdatedAt={c.dataUpdatedAt}
-                className={`opacity-0 animate-fade-in`}
-                appearDelay={`${index * 200}ms`}
-              />
-            ))
-        )}
-      </div>
-    );
-  }
+  const filteredCards = useCallback(
+    (category: string) => {
+      return cards.filter((card) => card.category === category);
+    },
+    [cards]
+  );
+
+  const cardsMap = useCallback(
+    (category: string) => {
+      return (
+        <div className="px-6 md:px-12 flex flex-col md:flex-row gap-4 overflow-x-auto no-scrollbar">
+          {isLoading ? (
+            <Card isLoading={true} />
+          ) : (
+            filteredCards(category)
+              .filter((c) => c.category === category)
+              .map((c, index) => (
+                <Card
+                  isLoading={false}
+                  key={c.id}
+                  title={c.title}
+                  updatedAt={c.updatedAt}
+                  logsCount={c.logsCount}
+                  dataName={c.dataName}
+                  dataType={c.dataType}
+                  dataUpdatedAt={c.dataUpdatedAt}
+                  className={`opacity-0 animate-fade-in`}
+                  appearDelay={`${index * 200}ms`}
+                />
+              ))
+          )}
+        </div>
+      );
+    },
+    [filteredCards, isLoading]
+  );
 
   return (
     <>
