@@ -138,7 +138,6 @@ function Search() {
               alert(applicationPreSelected?.title);
             }
           }
-          console.log(`${mode}_${preSelectedIndex}`);
         }
       }
     }
@@ -180,10 +179,10 @@ function Search() {
   }, [preSelectedIndex]);
 
   const containerClassName = join([
-    "fixed text-gray-400 transition-all duration-300 z-50",
+    "fixed text-gray-dark transition-all duration-300 z-50",
     isOpen
-      ? "top-4 inset-x-12 md:top-10 md:inset-x-24 lg:top-20 lg:inset-x-48 h-[92vh] md:h-[90vh] lg:h-[80vh] rounded-2xl bg-slate-100 p-1.5 flex flex-col overflow-hidden"
-      : "top-0 right-0 left-0 flex h-20 items-center bg-slate-200 cursor-pointer",
+      ? "top-4 inset-x-12 md:top-10 md:inset-x-24 lg:top-20 lg:inset-x-48 h-[92vh] md:h-[90vh] lg:h-[80vh] rounded-2xl bg-slate-light p-1.5 flex flex-col overflow-hidden"
+      : "top-0 right-0 left-0 flex h-20 items-center bg-slate cursor-pointer",
   ]);
 
   const backgroundClass = join([
@@ -193,7 +192,7 @@ function Search() {
 
   const searchBarClass = join([
     "flex justify-between gap-4 items-center w-full rounded-2xl transition-all duration-300",
-    isOpen ? "bg-slate-200 py-3 px-6" : "px-12",
+    isOpen ? "bg-slate py-3 px-6" : "px-12",
   ]);
 
   function handleSearch() {
@@ -217,7 +216,7 @@ function Search() {
       {suggestions.map((s, i) => (
         <button
           key={`${i}_${s.substring(0, 3)}`}
-          className="flex items-center gap-2 bg-gray-200 px-4 py-2 rounded-full hover:bg-gray-300"
+          className="flex items-center gap-2 bg-gray-light px-4 py-2 rounded-full hover:bg-gray"
           onClick={() => alert(s)}
         >
           <Icon icon="lucide:sparkle" />
@@ -233,10 +232,10 @@ function Search() {
         {categories.map((s, i) => (
           <button
             key={`${i}_${s.substring(0, 3)}`}
-            className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors font-semibold ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors font-medium ${
               selectedCategory === s
-                ? "bg-gray-800 text-white"
-                : "bg-gray-200 hover:bg-gray-300 text-gray-500"
+                ? "bg-black text-white"
+                : "bg-gray-light hover:bg-gray text-black"
             }`}
             style={{
               backgroundColor:
@@ -248,7 +247,7 @@ function Search() {
               <Icon
                 icon={categoriesIcons[s]}
                 fontSize={22}
-                className="text-gray-400"
+                className="text-gray-dark"
               />
             )}
             <span className="whitespace-nowrap capitalize">{s}</span>
@@ -372,8 +371,8 @@ function Search() {
                               className={
                                 "py-1 px-2 text-sm rounded " +
                                 (i > 0
-                                  ? "bg-green-200 text-green-600"
-                                  : "bg-blue-200 text-blue-600")
+                                  ? "bg-green-light text-green-dark"
+                                  : "bg-blue-light text-blue-dark")
                               }
                             >
                               {t}

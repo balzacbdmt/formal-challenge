@@ -6,11 +6,11 @@ function Stats() {
 
   return (
     <div className="flex gap-2">
-        <div className="flex-1 p-3 bg-slate-100  rounded-lg">
+        <div className="flex-1 p-3 bg-slate-light  rounded-lg">
             <p className="text-sm mb-2">Total queries</p>
             <p className="text-2xl text-black font-semibold">{formatNumberWithCommas(totalQueries)}</p>
         </div>
-        <div className="flex-1 p-3 bg-slate-100 rounded-lg">
+        <div className="flex-1 p-3 bg-slate-light rounded-lg">
             <p className="text-sm mb-2">Total queries</p>
             <p className="text-2xl text-black font-semibold">{weeklyTrend}%</p>
         </div>

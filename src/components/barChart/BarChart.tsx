@@ -35,7 +35,7 @@ function BarChart() {
         <div
           key={`${i}_${c}`}
           id={`${i}_${c}`}
-          className="w-4 bg-blue-500 h-[0%] rounded transition-[height] duration-500"
+          className="w-4 bg-blue h-[0%] rounded transition-[height] duration-500"
           style={{ opacity: `${calculateCrossProductPercentage(c, MAX)}%` }}
         />
       ))}

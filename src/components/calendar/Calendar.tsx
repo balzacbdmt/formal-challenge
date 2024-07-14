@@ -38,7 +38,7 @@ function Calendar() {
       {data.map((c, i) => (
         <div
           key={`${i}_${c}`}
-          className="h-3.5 w-full rounded bg-blue-500 opacity-0 transition-[opacity] duration-500"
+          className="h-3.5 w-full rounded bg-blue opacity-0 transition-[opacity] duration-500"
           style={{
             transitionDelay: `${calculateCrossProductPercentage(c, MAX) * 2}ms`, // Small transition delay effect
           }}
