@@ -151,12 +151,12 @@ function Search() {
 
   // Auto scroll on keyboard event
   useEffect(() => {
-    if (preSelectedIndex !== null) {
+    if (preSelectedIndex !== null && scrollablePartRef.current) {
       const preSelectedRow = document.getElementById(
         `${mode}_${preSelectedIndex}`
       );
 
-      if (scrollablePartRef.current && preSelectedRow) {
+      if (preSelectedRow) {
         const scrollablePart = scrollablePartRef.current;
         const scrollablePartRect = scrollablePart.getBoundingClientRect();
         const preSelectedRowRect = preSelectedRow.getBoundingClientRect();
@@ -195,6 +195,7 @@ function Search() {
     isOpen ? "bg-slate py-3 px-6" : "px-12",
   ]);
 
+  // On click search bar, open the menu
   function handleSearch() {
     if (!isOpen) {
       setIsOpen(true);
@@ -261,7 +262,7 @@ function Search() {
   const applicationsMapper = () => {
     let rowIndex = 0;
     return (
-      <div ref={scrollablePartRef} className="flex-1 overflow-scroll pb-4">
+      <div ref={scrollablePartRef} className="flex-1 overflow-y-scroll pb-4 no-scrollbar">
         {categories
           .filter((c) => c !== "all")
           .filter((c) =>
@@ -333,7 +334,7 @@ function Search() {
     }
 
     return (
-      <div className="flex-1 overflow-scroll pb-4">
+      <div className="flex-1 overflow-y-scroll pb-4 no-scrollbar">
         {commandsCategories
           .filter((c) => c !== "all")
           .map((cc) => (
@@ -347,7 +348,9 @@ function Search() {
                 .filter((c) => c.category === cc)
                 .filter((c) =>
                   inputValue
-                    ? c.title.toLowerCase().includes(inputValueWithoutSlash.toLowerCase())
+                    ? c.title
+                        .toLowerCase()
+                        .includes(inputValueWithoutSlash.toLowerCase())
                     : true
                 )
                 .map((c) => {
